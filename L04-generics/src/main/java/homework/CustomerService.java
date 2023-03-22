@@ -1,31 +1,23 @@
 package homework;
 
-import java.util.AbstractMap;
+
 import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
 
 public class CustomerService {
 
     //todo: 3. надо реализовать методы этого класса
     //важно подобрать подходящую Map-у, посмотрите на редко используемые методы, они тут полезны
-    NavigableMap<Customer, String> customers = new TreeMap<>();
 
     public Map.Entry<Customer, String> getSmallest() {
         //Возможно, чтобы реализовать этот метод, потребуется посмотреть как Map.Entry сделан в jdk
-        Map.Entry<Customer, String> first = customers.firstEntry();
-        return first == null ? null : new AbstractMap.SimpleEntry<>(new Customer(first.getKey()), first.getValue());
+        return null; // это "заглушка, чтобы скомилировать"
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
-        Map.Entry<Customer, String> higher = customers.higherEntry(customer);
-        return higher == null ? null : new AbstractMap.SimpleEntry<>(new Customer(higher.getKey()), higher.getValue());
+        return null; // это "заглушка, чтобы скомилировать"
     }
 
-    public void add(
-        Customer customer,
-        String data
-    ) {
-        customers.put(customer, data);
+    public void add(Customer customer, String data) {
+
     }
 }
