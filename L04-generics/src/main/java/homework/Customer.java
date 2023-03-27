@@ -1,13 +1,17 @@
 package homework;
 
-public class Customer implements Comparable<Customer>{
+public class Customer {
     private final long id;
     private String name;
     private long scores;
 
     //todo: 1. в этом классе надо исправить ошибки
 
-    public Customer(long id, String name, long scores) {
+    public Customer(
+        long id,
+        String name,
+        long scores
+    ) {
         this.id = id;
         this.name = name;
         this.scores = scores;
@@ -42,16 +46,20 @@ public class Customer implements Comparable<Customer>{
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", scores=" + scores +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", scores=" + scores +
+            '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Customer customer = (Customer) o;
         return id == customer.id;
@@ -62,8 +70,4 @@ public class Customer implements Comparable<Customer>{
         return (int) (id ^ (id >>> 32));
     }
 
-    @Override
-    public int compareTo(Customer customer) {
-        return Long.compare(this.scores, customer.getScores());
-    }
 }
