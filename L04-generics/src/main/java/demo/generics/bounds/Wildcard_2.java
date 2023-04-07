@@ -16,7 +16,7 @@ public class Wildcard_2 {
         List<Cat> catList = new ArrayList<>();
         catList.add( new Cat() );
         //printWild(catList);
-        printObj( catList );
+//        printObj( catList );
 
         for ( Cat cat : catList ) {
             if ( cat instanceof Cat ) {
@@ -44,9 +44,9 @@ public class Wildcard_2 {
         animalList.forEach( System.out::println );
     }
 
-    private static void printObj( List animalList ) {
-        animalList.add( "внезапно добавленная строка" );
-        animalList.forEach( System.out::println );
-    }
+//    private static void printObj( List animalList ) {
+//        animalList.add( "внезапно добавленная строка" );
+//        animalList.forEach( System.out::println );
+//    }
 
 }
