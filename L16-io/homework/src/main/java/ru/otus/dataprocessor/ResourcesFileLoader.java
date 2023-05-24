@@ -6,6 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 import ru.otus.model.Measurement;
 
 public class ResourcesFileLoader implements Loader {
@@ -21,7 +22,11 @@ public class ResourcesFileLoader implements Loader {
         //читает файл, парсит и возвращает результат
         var gson = new Gson();
         List<Measurement> measurements;
-        try (var input = new BufferedInputStream(ResourcesFileLoader.class.getClassLoader().getResourceAsStream(fileName))) {
+        try (
+            var input = new BufferedInputStream(Objects.requireNonNull(ResourcesFileLoader.class
+                                                                           .getClassLoader()
+                                                                           .getResourceAsStream(fileName)))
+        ) {
             var json = new String(input.readAllBytes());
             Type listMeasurements = new TypeToken<List<Measurement>>() {
             }.getType();
