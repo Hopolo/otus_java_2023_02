@@ -48,23 +48,6 @@ public class Message {
         this.field13 = field13;
     }
 
-    public Message(Message msg) {
-        this.id = msg.id;
-        this.field1 = msg.field1;
-        this.field2 = msg.field2;
-        this.field3 = msg.field3;
-        this.field4 = msg.field4;
-        this.field5 = msg.field5;
-        this.field6 = msg.field6;
-        this.field7 = msg.field7;
-        this.field8 = msg.field8;
-        this.field9 = msg.field9;
-        this.field10 = msg.field10;
-        this.field11 = msg.field11;
-        this.field12 = msg.field12;
-        this.field13 = new ObjectForMessage(msg.field13);
-    }
-
     public long getId() {
         return id;
     }
@@ -133,6 +116,12 @@ public class Message {
         Message message = (Message) o;
 
         return id == message.id;
+    }
+
+    public Message copy() {
+        return new Message(id, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12,
+                           field13.copy()
+        );
     }
 
     @Override

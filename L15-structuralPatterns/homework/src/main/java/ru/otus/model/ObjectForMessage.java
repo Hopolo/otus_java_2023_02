@@ -6,18 +6,17 @@ import java.util.List;
 public class ObjectForMessage {
     private List<String> data;
 
-    public ObjectForMessage() {
-    }
-
-    public ObjectForMessage(ObjectForMessage objectForMessage) {
-        this.setData(new ArrayList<>(objectForMessage.getData()));
-    }
-
     public List<String> getData() {
         return data;
     }
 
     public void setData(List<String> data) {
         this.data = data;
+    }
+
+    public ObjectForMessage copy() {
+        var copy = new ObjectForMessage();
+        copy.setData(new ArrayList<>(this.getData()));
+        return copy;
     }
 }
