@@ -4,4 +4,5 @@ dependencies {
     implementation("ch.qos.logback:logback-classic")
     implementation("org.flywaydb:flyway-core")
     implementation("org.postgresql:postgresql")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
