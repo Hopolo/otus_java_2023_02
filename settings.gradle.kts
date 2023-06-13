@@ -32,10 +32,22 @@ include("L18-rdbms")
 include("L19-jdbc:demo")
 include("L19-jdbc:homework")
 
-include ("L20-hibernate")
+include("L20-hibernate")
 
-include ("L21-jpql:class-demo")
-include ("L21-jpql:homework-template")
+include("L21-jpql:class-demo")
+include("L21-jpql:homework-template")
+include("L22-cache")
+
+include ("L23-noSQL:mongo-db-demo")
+include ("L23-noSQL:mongo-db-reactive-demo")
+include ("L23-noSQL:neo4j-demo")
+include ("L23-noSQL:redis-demo")
+include ("L23-noSQL:cassandra-demo")
+
+include ("L24-webServer")
+
+include ("L25-di:class-demo")
+include ("L25-di:homework-template")
 
 
 pluginManagement {
