@@ -3,12 +3,11 @@ package ru.otus.crm.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.core.repository.DataTemplate;
-import ru.otus.crm.model.Client;
 import ru.otus.core.sessionmanager.TransactionManager;
+import ru.otus.crm.model.Client;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class DbServiceClientImpl implements DBServiceClient {
     private static final Logger log = LoggerFactory.getLogger(DbServiceClientImpl.class);
@@ -28,11 +27,11 @@ public class DbServiceClientImpl implements DBServiceClient {
             if (client.getId() == null) {
                 var savedClient = clientDataTemplate.insert(session, clientCloned);
                 log.info("created client: {}", clientCloned);
-                return savedClient.clone();
+                return savedClient;
             }
             var savedClient = clientDataTemplate.update(session, clientCloned);
             log.info("updated client: {}", savedClient);
-            return savedClient.clone();
+            return savedClient;
         });
     }
 
@@ -41,7 +40,7 @@ public class DbServiceClientImpl implements DBServiceClient {
         return transactionManager.doInReadOnlyTransaction(session -> {
             var clientOptional = clientDataTemplate.findById(session, id);
             log.info("client: {}", clientOptional);
-            return clientOptional.map(Client::clone);
+            return clientOptional;
         });
     }
 
@@ -50,7 +49,7 @@ public class DbServiceClientImpl implements DBServiceClient {
         return transactionManager.doInReadOnlyTransaction(session -> {
             var clientList = clientDataTemplate.findAll(session);
             log.info("clientList:{}", clientList);
-            return clientList.stream().map(Client::clone).collect(Collectors.toList());
+            return clientList;
        });
     }
 }
