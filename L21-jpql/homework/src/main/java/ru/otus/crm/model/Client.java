@@ -1,10 +1,8 @@
 package ru.otus.crm.model;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +13,6 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +22,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "client")
-@AllArgsConstructor
 public class Client implements Cloneable {
 
     @Id
@@ -41,8 +37,8 @@ public class Client implements Cloneable {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Phone> phones = new ArrayList<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Phone> phones;
 
     public Client(String name) {
         this.id = null;
@@ -55,6 +51,19 @@ public class Client implements Cloneable {
     ) {
         this.id = id;
         this.name = name;
+    }
+
+    public Client(
+        Long id,
+        String name,
+        Address address,
+        List<Phone> phones
+    ) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phones = new ArrayList<>();
+        phones.forEach(phone -> this.phones.add(new Phone(phone.getId(), phone.getNumber(), this)));
     }
 
     @Override

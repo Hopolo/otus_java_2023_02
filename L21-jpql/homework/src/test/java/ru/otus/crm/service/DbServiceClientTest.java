@@ -2,10 +2,13 @@ package ru.otus.crm.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.otus.base.AbstractHibernateTest;
+import ru.otus.crm.model.Address;
 import ru.otus.crm.model.Client;
+import ru.otus.crm.model.Phone;
 
 @DisplayName("Демо работы с hibernate (с абстракциями) должно ")
 class DbServiceClientTest extends AbstractHibernateTest {
@@ -14,14 +17,15 @@ class DbServiceClientTest extends AbstractHibernateTest {
     @DisplayName(" корректно сохранять, изменять и загружать клиента")
     void shouldCorrectSaveClient() {
         //given
-        var client = new Client("Ivan");
+//        var client = new Client("Ivan");
 
         // Это надо раскомментировать, у выполненного ДЗ, все тесты должны проходить
         // Кроме удаления комментирования, тестовый класс менять нельзя
-/*
-        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"), List.of(new Phone(null, "13-555-22"),
-                new Phone(null, "14-666-333")));
-*/
+
+        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"), List.of(
+            new Phone(null, "13-555-22"),
+            new Phone(null, "14-666-333")
+        ));
 
         //when
         var savedClient = dbServiceClient.saveClient(client);
@@ -31,7 +35,7 @@ class DbServiceClientTest extends AbstractHibernateTest {
         var loadedSavedClient = dbServiceClient.getClient(savedClient.getId());
         assertThat(loadedSavedClient).isPresent();
         assertThat(loadedSavedClient).get()
-                .usingRecursiveComparison().isEqualTo(savedClient);
+            .usingRecursiveComparison().isEqualTo(savedClient);
 
         //when
         var savedClientUpdated = loadedSavedClient.get();
@@ -42,7 +46,7 @@ class DbServiceClientTest extends AbstractHibernateTest {
         var loadedClient = dbServiceClient.getClient(savedClientUpdated.getId());
         assertThat(loadedClient).isPresent();
         assertThat(loadedClient).get()
-                .usingRecursiveComparison().isEqualTo(savedClientUpdated);
+            .usingRecursiveComparison().isEqualTo(savedClientUpdated);
         System.out.println(loadedClient);
 
         //when
