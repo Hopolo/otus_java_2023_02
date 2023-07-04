@@ -44,10 +44,6 @@ class DataTemplateHibernateTest extends AbstractHibernateTest {
                 .map(Client::clone)
         );
 
-        var loadedSavedClients = transactionManager.doInReadOnlyTransaction(
-            session -> clientTemplate.findAll(session)
-        );
-
         //then
         assertThat(loadedSavedClient).isPresent().get()
             .usingRecursiveComparison()
