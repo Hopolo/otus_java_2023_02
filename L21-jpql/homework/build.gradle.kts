@@ -16,4 +16,13 @@ dependencies {
 
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
+    implementation("com.google.code.gson:gson")
+
+    implementation("org.eclipse.jetty:jetty-servlet")
+    implementation("org.eclipse.jetty:jetty-server")
+    implementation("org.eclipse.jetty:jetty-webapp")
+    implementation("org.eclipse.jetty:jetty-security")
+    implementation("org.eclipse.jetty:jetty-http")
+    implementation("org.eclipse.jetty:jetty-io")
+    implementation("org.eclipse.jetty:jetty-util")
 }

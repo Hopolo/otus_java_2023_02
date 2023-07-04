@@ -40,6 +40,8 @@ public class Client implements Cloneable {
     @OneToMany(orphanRemoval = true, mappedBy = "client", cascade = CascadeType.ALL)
     private List<Phone> phones;
 
+    private String password;
+
     public Client(String name) {
         this.id = null;
         this.name = name;
