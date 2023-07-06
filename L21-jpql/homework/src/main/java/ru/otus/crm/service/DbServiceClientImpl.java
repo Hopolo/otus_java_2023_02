@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.otus.core.cache.HwCache;
+import ru.otus.core.cache.HwListener;
 import ru.otus.core.cache.MyCache;
 import ru.otus.core.repository.DataTemplate;
 import ru.otus.core.sessionmanager.TransactionManager;
@@ -20,10 +21,12 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     public DbServiceClientImpl(
         TransactionManager transactionManager,
-        DataTemplate<Client> clientDataTemplate
+        DataTemplate<Client> clientDataTemplate,
+        HwListener<String, Client> cacheListener
     ) {
         this.transactionManager = transactionManager;
         this.clientDataTemplate = clientDataTemplate;
+        cache.addListener(cacheListener);
     }
 
     @Override
