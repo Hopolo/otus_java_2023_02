@@ -93,17 +93,18 @@ class DbServiceClientTest extends AbstractHibernateTest {
                 Client value,
                 String action
             ) {
-                System.out.println("get(): cache used");
+                System.out.println("cache used");
             }
         });
         dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate, listener);
 
         //when
         var savedClient = dbServiceClient.saveClient(client);
-        System.out.println(savedClient);
-
+        Long id = savedClient.getId();
         //then
-        dbServiceClient.getClient(savedClient.getId());
-        verify(listener, Mockito.times(2)).notify(any(), any(), any());
+        dbServiceClient.getClient(id);
+        dbServiceClient.getClient(id);
+
+        verify(listener, Mockito.times(3)).notify(any(), any(), any());
     }
 }
