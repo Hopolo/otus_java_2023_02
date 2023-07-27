@@ -25,4 +25,6 @@ dependencies {
     implementation("org.eclipse.jetty:jetty-http")
     implementation("org.eclipse.jetty:jetty-io")
     implementation("org.eclipse.jetty:jetty-util")
+
+    implementation("org.freemarker:freemarker")
 }

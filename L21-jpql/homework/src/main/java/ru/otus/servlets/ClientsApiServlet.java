@@ -6,21 +6,26 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import ru.otus.dao.UserDao;
-import ru.otus.model.User;
+import java.util.Optional;
+import ru.otus.core.repository.DataTemplateHibernate;
+import ru.otus.core.sessionmanager.TransactionManager;
+import ru.otus.crm.model.Client;
 
 public class ClientsApiServlet extends HttpServlet {
 
     private static final int ID_PATH_PARAM_POSITION = 1;
 
-    private final UserDao userDao;
+    private final DataTemplateHibernate<Client> clientDataTemplateHibernate;
+    private final TransactionManager transactionManager;
     private final Gson gson;
 
     public ClientsApiServlet(
-        UserDao userDao,
+        DataTemplateHibernate<Client> clientDataTemplateHibernate,
+        TransactionManager transactionManager,
         Gson gson
     ) {
-        this.userDao = userDao;
+        this.clientDataTemplateHibernate = clientDataTemplateHibernate;
+        this.transactionManager = transactionManager;
         this.gson = gson;
     }
 
@@ -29,11 +34,15 @@ public class ClientsApiServlet extends HttpServlet {
         HttpServletRequest request,
         HttpServletResponse response
     ) throws IOException {
-        User user = userDao.findById(extractIdFromRequest(request)).orElse(null);
+        Optional<Client> client =
+            transactionManager.doInReadOnlyTransaction(session -> clientDataTemplateHibernate.findById(
+                session,
+                extractIdFromRequest(request)
+            ));
 
         response.setContentType("application/json;charset=UTF-8");
         ServletOutputStream out = response.getOutputStream();
-        out.print(gson.toJson(user));
+        out.print(gson.toJson(client));
     }
 
     private long extractIdFromRequest(HttpServletRequest request) {

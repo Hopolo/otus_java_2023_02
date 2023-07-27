@@ -28,4 +28,9 @@ public class Address implements Cloneable {
         return new Address(id, street);
     }
 
+    @Override
+    public String toString() {
+        return street;
+    }
+
 }

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collections;
+import ru.otus.core.sessionmanager.TransactionManager;
 import ru.otus.services.ClientAuthService;
 import ru.otus.services.TemplateProcessor;
 
@@ -21,13 +22,16 @@ public class LoginServlet extends HttpServlet {
 
     private final TemplateProcessor templateProcessor;
     private final ClientAuthService clientAuthService;
+    private final TransactionManager transactionManager;
 
     public LoginServlet(
         TemplateProcessor templateProcessor,
-        ClientAuthService clientAuthService
+        ClientAuthService clientAuthService,
+        TransactionManager transactionManager
     ) {
         this.clientAuthService = clientAuthService;
         this.templateProcessor = templateProcessor;
+        this.transactionManager = transactionManager;
     }
 
     @Override
@@ -44,14 +48,12 @@ public class LoginServlet extends HttpServlet {
         HttpServletRequest request,
         HttpServletResponse response
     ) throws IOException {
-
         String name = request.getParameter(PARAM_LOGIN);
         String password = request.getParameter(PARAM_PASSWORD);
-
         if (clientAuthService.authenticate(name, password)) {
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
-            response.sendRedirect("/users");
+            response.sendRedirect("/clients");
         } else {
             response.setStatus(SC_UNAUTHORIZED);
         }

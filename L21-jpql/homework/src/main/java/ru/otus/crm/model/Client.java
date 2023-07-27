@@ -67,9 +67,24 @@ public class Client implements Cloneable {
         phones.forEach(phone -> this.phones.add(new Phone(phone.getId(), phone.getNumber(), this)));
     }
 
+    public Client(
+        Long id,
+        String name,
+        Address address,
+        List<Phone> phones,
+        String password
+    ) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phones = new ArrayList<>();
+        phones.forEach(phone -> this.phones.add(new Phone(phone.getId(), phone.getNumber(), this)));
+        this.password = password;
+    }
+
     @Override
     public Client clone() {
-        return new Client(this.id, this.name, this.address.clone(), List.copyOf(this.phones));
+        return new Client(this.id, this.name, this.address.clone(), List.copyOf(this.phones), password);
     }
 
     @Override
@@ -79,6 +94,7 @@ public class Client implements Cloneable {
             ", name='" + name + '\'' +
             ", address='" + address + '\'' +
             ", phones='" + phones + '\'' +
+            ", password='" + password + '\'' +
             '}';
     }
 }

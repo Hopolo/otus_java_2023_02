@@ -1,29 +1,36 @@
 package ru.otus.services;
 
-import org.hibernate.Session;
+import java.util.List;
 import ru.otus.core.repository.DataTemplateHibernate;
+import ru.otus.core.sessionmanager.TransactionManager;
 import ru.otus.crm.model.Client;
 
 public class ClientAuthServiceImpl implements ClientAuthService {
 
     private final DataTemplateHibernate<Client> clientDataTemplateHibernate;
+    private final TransactionManager transactionManager;
 
     public ClientAuthServiceImpl(
-        Session session,
-        DataTemplateHibernate<Client> clientDataTemplateHibernate
+        DataTemplateHibernate<Client> clientDataTemplateHibernate,
+        TransactionManager transactionManager
     ) {
         this.clientDataTemplateHibernate = clientDataTemplateHibernate;
+        this.transactionManager = transactionManager;
     }
 
     @Override
     public boolean authenticate(
-        Session session,
         String login,
         String password
     ) {
-        return clientDataTemplateHibernate.findByEntityField(session, "password", password)
-            .stream()
-            .anyMatch(client -> client.getPassword().equals(password));
+        return transactionManager.doInReadOnlyTransaction(session -> {
+            List<Client> clients = clientDataTemplateHibernate.findByEntityField(
+                session,
+                "password",
+                password
+            );
+            return clients.stream().anyMatch(client -> client.getName().equals(login));
+        });
     }
 
 }
