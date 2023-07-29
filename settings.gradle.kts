@@ -49,6 +49,37 @@ include ("L24-webServer")
 include ("L25-di:class-demo")
 include ("L25-di:homework-template")
 
+include ("L26-springBootMvc")
+
+include ("L27-websocket:websocket")
+include ("L27-websocket:messager")
+include ("L27-websocket:messager-starter")
+include ("L27-websocket:application")
+include ("L28-springDataJdbc")
+include ("L29-threads")
+include ("L30-JMM")
+
+include ("L31-concurrentCollections:ConcurrentCollections")
+include ("L31-concurrentCollections:QueueDemo")
+
+include ("L33-multiprocess:processes-demo")
+include ("L33-multiprocess:sockets-demo")
+include ("L33-multiprocess:rmi-demo")
+include ("L33-multiprocess:grpc-demo")
+
+include ("L34-rabbitMQ:allServicesModels")
+include ("L34-rabbitMQ:approvalService")
+include ("L34-rabbitMQ:mainService")
+
+include ("L34-executors")
+include ("L35-NIO")
+include ("L36-netty")
+
+include ("L37-webflux:source")
+include ("L37-webflux:processor")
+include ("L37-webflux:client")
+include ("L37-webflux-chat:client-service")
+include ("L37-webflux-chat:datastore-service")
 
 pluginManagement {
     val jgitver: String by settings
