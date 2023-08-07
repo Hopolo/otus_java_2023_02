@@ -45,4 +45,9 @@ public class Phone implements Cloneable {
         return new Phone(id, number);
     }
 
+    @Override
+    public String toString() {
+        return number;
+    }
+
 }
