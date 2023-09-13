@@ -13,12 +13,6 @@
                 .then(response => response.json())
                 .then(client => clientDataContainer.innerHTML = JSON.stringify(client));
         }
-
-
-
-
-
-
     </script>
 </head>
 <body>
@@ -39,7 +33,7 @@
         <td th:text="${client.id}"></td>
         <td th:text="${client.name}"></td>
         <td th:text="${client.address}"></td>
-        <td th:text="${client.phone[0]}"></td>
+        <td th:text="${client.phones[0]}"></td>
         <td th:text="${client.password}"></td>
     </tr>
     </tbody>

@@ -6,6 +6,10 @@ spring:
   flyway:
     enabled: true
 
-logging:
-  level:
-    org.springframework.jdbc.core.JdbcTemplate: TRACE
+#logging:
+#  level:
+#    org.springframework.jdbc.core.JdbcTemplate: TRACE
+
+#logging:
+#  level:
+trace: true

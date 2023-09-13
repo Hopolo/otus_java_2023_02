@@ -1,10 +1,10 @@
 package ru.otus.crm.model;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "address")
 @Getter

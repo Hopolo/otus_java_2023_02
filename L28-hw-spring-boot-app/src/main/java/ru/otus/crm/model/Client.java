@@ -2,7 +2,6 @@ package ru.otus.crm.model;
 
 import jakarta.annotation.Nonnull;
 import java.util.Set;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Getter
 @Setter
 @Table(name = "client")
 public class Client implements Cloneable, Persistable<Long> {
@@ -31,9 +29,6 @@ public class Client implements Cloneable, Persistable<Long> {
     @Transient
     private final boolean isNew;
 
-    public Client() {
-        this(null, null, null, null, null, true);
-    }
 
     public Client(
         Long id,
@@ -63,6 +58,27 @@ public class Client implements Cloneable, Persistable<Long> {
     }
 
     @Override
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public boolean isNew() {
         return isNew;
     }
@@ -83,5 +99,4 @@ public class Client implements Cloneable, Persistable<Long> {
             ", isNew='" + isNew + '\'' +
             '}';
     }
-
 }

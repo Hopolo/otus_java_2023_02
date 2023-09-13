@@ -34,7 +34,7 @@ public class DbServiceClientImpl implements DBServiceClient {
             var clientCloned = client.clone();
             if (client.getId() == null) {
                 var savedClient = clientRepository.save(clientCloned);
-                log.info("created client: {}", clientCloned);
+                log.info("created client: {}", savedClient);
                 myCache.put(savedClient.getId().toString(), savedClient);
                 return savedClient;
             }

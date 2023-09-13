@@ -38,36 +38,31 @@
                 .then(response => response.json())
                 .then(client => clientDataContainer.innerHTML = 'Клиент создан: ' + JSON.stringify(client));
         }
-
-
-
-
-
     </script>
 </head>
 <body>
 
-<form accept-charset="utf-8" id="create-form" th:action="@{/client/save}" th:method="post" th:object="${client}">
+<form accept-charset="utf-8" id="create-form" th:action="@{/client/save}" th:method="post">
     <h1>New Client:</h1>
 
     <div class="row">
         <label for="clientName">Name:</label>
-        <input id="clientName" name="name" th:value="*{name}" type="text"/>
+        <input id="clientName" name="name" th:value="${name}" type="text"/>
     </div>
 
     <div class="row">
         <label for="clientAddress">Address:</label>
-        <input id="clientAddress" name="address" th:value="*{address}" type="text"/>
+        <input id="clientAddress" name="address" th:value="${address}" type="text"/>
     </div>
 
     <div class="row">
         <label for="clientPhone">Phone:</label>
-        <input id="clientPhone" name="phone" th:value="*{phone}" type="text"/>
+        <input id="clientPhone" name="phone" th:value="${phone}" type="text"/>
     </div>
 
     <div class="row">
         <label for="clientPassword">Password:</label>
-        <input id="clientPassword" name="password" th:value="*{password}" type="text"/>
+        <input id="clientPassword" name="password" th:value="${password}" type="text"/>
     </div>
 
     <div class="row">
