@@ -1,5 +1,7 @@
 package ru.otus.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -16,9 +18,10 @@ public class Address implements Cloneable {
     private final String street;
     private final Long clientId;
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Address(
-        String street,
-        Long clientId
+        @JsonProperty(value = "street") String street,
+        @JsonProperty(value = "clientId") Long clientId
     ) {
         this(null, street, clientId);
     }

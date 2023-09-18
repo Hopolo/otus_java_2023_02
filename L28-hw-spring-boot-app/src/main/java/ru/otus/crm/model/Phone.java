@@ -1,5 +1,7 @@
 package ru.otus.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -15,9 +17,10 @@ public class Phone implements Cloneable {
     private final String number;
     private final Long clientId;
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Phone(
-        String number,
-        Long clientId
+        @JsonProperty(value = "number") String number,
+        @JsonProperty(value = "clientId") Long clientId
     ) {
         this(null, number, clientId);
     }

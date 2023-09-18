@@ -1,5 +1,7 @@
 package ru.otus.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import java.util.Set;
 import lombok.Setter;
@@ -29,14 +31,14 @@ public class Client implements Cloneable, Persistable<Long> {
     @Transient
     private final boolean isNew;
 
-
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Client(
-        Long id,
-        String name,
-        Address address,
-        Set<Phone> phones,
-        String password,
-        boolean isNew
+        @JsonProperty(value = "id") Long id,
+        @JsonProperty(value = "name") String name,
+        @JsonProperty(value = "address") Address address,
+        @JsonProperty(value = "phones") Set<Phone> phones,
+        @JsonProperty(value = "password") String password,
+        @JsonProperty(value = "isNew") boolean isNew
     ) {
         this.id = id;
         this.name = name;
