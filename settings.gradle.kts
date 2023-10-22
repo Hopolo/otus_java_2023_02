@@ -62,6 +62,7 @@ include("L30-JMM")
 include("L31-concurrentCollections:ConcurrentCollections")
 include("L31-concurrentCollections:QueueDemo")
 
+include("L33-hw-kill-boss")
 include("L33-multiprocess:processes-demo")
 include("L33-multiprocess:sockets-demo")
 include("L33-multiprocess:rmi-demo")
