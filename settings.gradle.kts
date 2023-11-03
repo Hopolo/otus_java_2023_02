@@ -68,18 +68,19 @@ include("L33-multiprocess:rmi-demo")
 include("L33-multiprocess:grpc-demo")
 
 include("L34-rabbitMQ:allServicesModels")
-include ("L34-rabbitMQ:approvalService")
-include ("L34-rabbitMQ:mainService")
+include("L34-rabbitMQ:approvalService")
+include("L34-rabbitMQ:mainService")
 
-include ("L34-executors")
-include ("L35-NIO")
-include ("L36-netty")
+include("L34-executors-hw")
+include("L34-executors")
+include("L35-NIO")
+include("L36-netty")
 
-include ("L37-webflux:source")
-include ("L37-webflux:processor")
-include ("L37-webflux:client")
-include ("L37-webflux-chat:client-service")
-include ("L37-webflux-chat:datastore-service")
+include("L37-webflux:source")
+include("L37-webflux:processor")
+include("L37-webflux:client")
+include("L37-webflux-chat:client-service")
+include("L37-webflux-chat:datastore-service")
 
 pluginManagement {
     val jgitver: String by settings
