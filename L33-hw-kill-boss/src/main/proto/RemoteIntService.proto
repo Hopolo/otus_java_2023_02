@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ru.otus.protobuf.generated;
+
+option java_multiple_files = true;
+
+message StartStreamMessage {
+    int32 first = 1;
+    int32 last = 2;
+}
+
+message IntStreamElement {
+    int64 element = 1;
+}
+service RemoteIntStreamService {
+    rpc intStream(StartStreamMessage) returns (stream IntStreamElement);
+}
