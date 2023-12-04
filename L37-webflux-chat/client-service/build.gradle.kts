@@ -6,6 +6,7 @@ dependencies {
     implementation("org.webjars:sockjs-client")
     implementation("org.webjars:stomp-websocket")
     implementation("org.webjars:bootstrap")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
 }
 
 
