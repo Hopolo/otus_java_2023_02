@@ -1,5 +1,8 @@
 package ru.petrelevich.service;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+import static ru.petrelevich.constants.DataStoreConstants.MYSTERIOUS_ROOM;
+
 import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +12,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import ru.petrelevich.domain.Message;
 import ru.petrelevich.repository.MessageRepository;
-
-import static java.time.temporal.ChronoUnit.SECONDS;
 
 @Service
 public class DataStoreR2dbc implements DataStore {
@@ -32,7 +33,10 @@ public class DataStoreR2dbc implements DataStore {
     @Override
     public Flux<Message> loadMessages(String roomId) {
         log.info("loadMessages roomId:{}", roomId);
+        if (Integer.parseInt(roomId) == MYSTERIOUS_ROOM) {
+            return messageRepository.findAll();
+        }
         return messageRepository.findByRoomId(roomId)
-                .delayElements(Duration.of(3, SECONDS), workerPool);
+            .delayElements(Duration.of(3, SECONDS), workerPool);
     }
 }

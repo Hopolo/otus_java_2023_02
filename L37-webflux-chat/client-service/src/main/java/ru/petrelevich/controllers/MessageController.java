@@ -1,5 +1,7 @@
 package ru.petrelevich.controllers;
 
+import static ru.petrelevich.constants.ClientServiceConstants.MYSTERIOUS_ROOM;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
@@ -34,11 +36,16 @@ public class MessageController {
     @MessageMapping("/message.{roomId}")
     public void getMessage(@DestinationVariable String roomId, Message message) {
         logger.info("get message:{}, roomId:{}", message, roomId);
+        if (Integer.parseInt(roomId) == MYSTERIOUS_ROOM) {
+            logger.warn("you're can't send message from this room!");
+            return;
+        }
         saveMessage(roomId, message)
-                .subscribe(msgId -> logger.info("message send id:{}", msgId));
+            .subscribe(msgId -> logger.info("message send id:{}", msgId));
 
-        template.convertAndSend(String.format("%s%s", TOPIC_TEMPLATE, roomId),
-                new Message(HtmlUtils.htmlEscape(message.messageStr())));
+        var wsMessage = new Message(HtmlUtils.htmlEscape(message.messageStr()));
+        template.convertAndSend(String.format("%s%s", TOPIC_TEMPLATE, roomId), wsMessage);
+        template.convertAndSend(String.format("%s%s", TOPIC_TEMPLATE, MYSTERIOUS_ROOM), wsMessage);
     }
 
 
